@@ -74,6 +74,10 @@ describe("should deploy the collection and Nft contracts , and return the revela
   });
   it("should deploy the Nft Contract and return the revelant data ", async function () {
     // fetching the Collectoin contract
+    const Collection = await locklift.factory.getDeployedContract(
+      "RevoltNftCollection",
+      collectionAddr
+    );
     const { traceTree: data } = await locklift.tracing.trace(
       Collection.methods.mint({}).send({
         from: WalletV3.account.address,
@@ -95,9 +99,8 @@ describe("should deploy the collection and Nft contracts , and return the revela
       "RevoltNft",
       NftAddr
     );
-    console.log(
-      "nft owner  :",
+    expect(
       (await NftCon.methods.getInfo({ answerId: 0 }).call({})).owner.toString()
-    );
+    ).to.eq(WalletV3.account.address.toString());
   });
 });
