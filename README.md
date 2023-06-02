@@ -1,5 +1,5 @@
 NOTICE : its a temp readme
-NOTICE: ART BY Sixtheplug
+NOTICE: ART BY https://github.com/Sixtheplug
 Revolt NFT Collection on the Venom Blockchain
 
 Welcome to the GitHub repository for the Revolt NFT collection on the Venom blockchain! This repository contains all of the code and resources necessary to create and manage this exciting new collection of unique digital assets.
