@@ -1,0 +1,28 @@
+pragma ever-solidity >= 0.61.2;
+
+pragma AbiHeader pubkey;
+pragma AbiHeader expire;
+
+import "tip4/contracts/CollectionBase.tsol";
+
+contract RevoltNftCollection is CollectionBase{
+
+    constructor(      
+        TvmCell codeNft, 
+        TvmCell codeIndex,
+        TvmCell codeIndexBasis,
+        string json
+        ) CollectionBase(     
+        codeNft, 
+        codeIndex,
+        codeIndexBasis,
+        json
+        )public {
+            
+        }
+// pragma AbiHeader pubkey;
+
+    function mint() external internalMsg{
+        _mintNft(_json);
+    }
+}

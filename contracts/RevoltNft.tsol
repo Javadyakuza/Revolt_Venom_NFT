@@ -1,0 +1,31 @@
+pragma ever-solidity >= 0.61.2;
+
+pragma AbiHeader pubkey;
+pragma AbiHeader expire;
+
+import "tip4/contracts/NftBase.tsol";
+
+contract RevoltNft is NftBase{
+
+    constructor(      
+        address owner,
+        address sendGasTo,
+        uint128 remainOnNft,
+        string  json,
+        uint128 indexDeployValue,
+        uint128 indexDestroyValue,
+        TvmCell codeIndex
+        ) NftBase(     
+            owner,
+            sendGasTo,
+            remainOnNft,
+            json,
+            indexDeployValue,
+            indexDestroyValue,
+            codeIndex
+
+        )public {
+            
+        }
+
+}

@@ -1,0 +1,1 @@
+<h2>**Attention!** Do not rebuild the Index and IndexBasis contracts, the compiled files are in the ./compiled directory</h2>
