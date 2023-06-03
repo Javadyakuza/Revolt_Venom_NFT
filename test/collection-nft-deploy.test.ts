@@ -63,7 +63,7 @@ describe("should deploy the collection and Nft contracts , and return the revela
       collectionAddr
     );
     let example_agent_metadata: string = fs.readFileSync(
-      "./metadata/agents_metadata/1.json",
+      "../metadata/agents_metadata/1.json",
       "utf-8"
     );
     const { traceTree: data } = await locklift.tracing.trace(
