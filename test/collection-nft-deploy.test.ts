@@ -3,8 +3,7 @@ import { Address, Contract, Signer, zeroAddress } from "locklift";
 import { ContractData } from "locklift/internal/factory/index";
 import { FactorySource } from "../build/factorySource";
 import { expect } from "chai";
-import { json } from "stream/consumers";
-
+import fs from "fs";
 describe("should deploy the collection and Nft contracts , and return the revelant data", async function () {
   let WalletV3: CreateAccountOutput;
   var signer: Signer;
@@ -13,7 +12,6 @@ describe("should deploy the collection and Nft contracts , and return the revela
   var IndexArt: ContractData<FactorySource["Index"]>;
   var IndexBasisArt: ContractData<FactorySource["IndexBasis"]>;
   var collectionAddr: Address;
-  var metadata: string;
   before(async function () {
     signer = (await locklift.keystore.getSigner("0"))!;
     RevoltNftArt = locklift.factory.getContractArtifacts("RevoltNft");
@@ -27,25 +25,11 @@ describe("should deploy the collection and Nft contracts , and return the revela
       publicKey: signer.publicKey,
     });
     console.log("wallet : ", WalletV3.account.address.toString());
-    metadata = JSON.stringify({
-      type: "Basic NFT",
-      name: "Revolt NFT",
-      description: "bad ass nft collection",
-      preview: {
-        source:
-          "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-        mimetype: "image/png",
-      },
-      files: [
-        {
-          source:
-            "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGljfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
-          mimetype: "image/png",
-        },
-      ],
-      external_url: "https://nft.venom",
-    });
   });
+  let example_collection_metadata: string = fs.readFileSync(
+    "./metadata/Collection_metadata.json",
+    "utf-8"
+  );
   it("should deploy Collection contract and return valid json", async function () {
     const { contract: Collection } = await locklift.factory.deployContract({
       contract: "RevoltNftCollection",
@@ -55,7 +39,7 @@ describe("should deploy the collection and Nft contracts , and return the revela
         codeIndex: IndexArt.code,
         codeIndexBasis: IndexBasisArt.code,
         codeNft: RevoltNftArt.code,
-        json: metadata,
+        json: example_collection_metadata,
       },
       value: locklift.utils.toNano(3),
     });
@@ -68,7 +52,7 @@ describe("should deploy the collection and Nft contracts , and return the revela
         })
         .call({})
     ).json;
-    expect(jsonReturned).to.not.eq("");
+    expect(jsonReturned).to.eq(example_collection_metadata);
     // setting the state varible
     collectionAddr = Collection.address;
   });
@@ -78,8 +62,12 @@ describe("should deploy the collection and Nft contracts , and return the revela
       "RevoltNftCollection",
       collectionAddr
     );
+    let example_agent_metadata: string = fs.readFileSync(
+      "./metadata/agents_metadata/1.json",
+      "utf-8"
+    );
     const { traceTree: data } = await locklift.tracing.trace(
-      Collection.methods.mint({ _json: "fuck off bitch" }).send({
+      Collection.methods.mint({ _json: example_agent_metadata }).send({
         from: WalletV3.account.address,
         amount: locklift.utils.toNano(5),
       })
@@ -103,7 +91,7 @@ describe("should deploy the collection and Nft contracts , and return the revela
       (await NftCon.methods.getInfo({ answerId: 0 }).call({})).owner.toString()
     ).to.eq(WalletV3.account.address.toString());
     expect((await NftCon.methods.getJson({ answerId: 0 }).call({})).json).to.eq(
-      "fuck off bitch"
+      example_agent_metadata
     );
   });
 });
