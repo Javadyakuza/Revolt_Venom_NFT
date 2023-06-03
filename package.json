@@ -19,6 +19,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "tip4": "^1.1.6"
+    "tip4": "^1.1.6",
+    "web3.storage": "^4.5.4"
   }
 }

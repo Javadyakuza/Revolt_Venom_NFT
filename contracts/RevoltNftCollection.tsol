@@ -22,7 +22,7 @@ contract RevoltNftCollection is CollectionBase{
         }
 // pragma AbiHeader pubkey;
 
-    function mint() external internalMsg{
+    function mint(string _json) external internalMsg{
         _mintNft(_json);
     }
 }

@@ -112,10 +112,11 @@ IFREF {
 	CALL $c4_to_c7$
 }
 .loc ../contracts/RevoltNftCollection.tsol, 25
+LDREF
 ENDS
 .loc ../contracts/RevoltNftCollection.tsol, 0
 CALLREF {
-	CALL $mint_1249c58b_internal_macro$
+	CALL $mint_d85d3d27_internal_macro$
 }
 DROP
 CALLREF {
@@ -123,14 +124,13 @@ CALLREF {
 }
 THROW 0
 
-.macro mint_1249c58b_internal_macro
+.macro mint_d85d3d27_internal_macro
 .loc ../contracts/RevoltNftCollection.tsol, 25
 DEPTH
 ADDCONST -5
 PICK
 THROWIF 72
 .loc ../contracts/RevoltNftCollection.tsol, 26
-GETGLOB 13
 CALLREF {
 	CALL $_mintNft_4d0b706c_internal_macro$
 }
@@ -2015,7 +2015,7 @@ THROW 60
 
 .macro public_function_selector
 DUP
-PUSHINT 348956614
+PUSHINT 502829540
 LEQ
 IFJMPREF {
 	DUP
@@ -2023,12 +2023,6 @@ IFJMPREF {
 	EQUAL
 	IFJMPREF {
 		CALL $indexCode$
-	}
-	DUP
-	PUSHINT 241815043
-	EQUAL
-	IFJMPREF {
-		CALL $mint$
 	}
 	DUP
 	PUSHINT 263162756
@@ -2042,17 +2036,17 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $indexCodeHash$
 	}
-}
-DUP
-PUSHINT 839183401
-LEQ
-IFJMPREF {
 	DUP
 	PUSHINT 502829540
 	EQUAL
 	IFJMPREF {
 		CALL $constructor$
 	}
+}
+DUP
+PUSHINT 880007004
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 618124789
 	EQUAL
@@ -2071,17 +2065,17 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $supportsInterface$
 	}
-}
-DUP
-PUSHINT 1479945602
-LEQ
-IFJMPREF {
 	DUP
 	PUSHINT 880007004
 	EQUAL
 	IFJMPREF {
 		CALL $indexBasisCodeHash$
 	}
+}
+DUP
+PUSHINT 1629421668
+LEQ
+IFJMPREF {
 	DUP
 	PUSHINT 953907334
 	EQUAL
@@ -2100,11 +2094,17 @@ IFJMPREF {
 	IFJMPREF {
 		CALL $indexBasisCode$
 	}
+	DUP
+	PUSHINT 1629421668
+	EQUAL
+	IFJMPREF {
+		CALL $totalSupply$
+	}
 }
 DUP
-PUSHINT 1629421668
+PUSHINT 1659888937
 EQUAL
 IFJMPREF {
-	CALL $totalSupply$
+	CALL $mint$
 }
 

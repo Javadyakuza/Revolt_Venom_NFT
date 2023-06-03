@@ -17,6 +17,7 @@
 		{
 			"name": "mint",
 			"inputs": [
+				{"name":"_json","type":"string"}
 			],
 			"outputs": [
 			]

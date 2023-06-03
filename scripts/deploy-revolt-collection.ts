@@ -78,7 +78,7 @@ async function main() {
   );
   console.log(
     "nft owner  :",
-    (await NftCon.methods.getInfo({ answerId: 0 }).call({})).owner.toString()
+    (await NftCon.methods.getInfo({ answerId: 0 }).call({}))..toString()
   );
 }
 
