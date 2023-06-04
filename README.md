@@ -21,8 +21,6 @@ This repository contains a number of different files and folders, each of which 
 
     scripts/: This directory contains various scripts that can be used to interact with the Revolt NFT collection. These include scripts for minting new NFTs, transferring ownership of existing NFTs, and more.
 
-    docs/: This directory contains any relevant documentation or other resources related to the Revolt NFT collection. This may include whitepapers, user guides, FAQs, and more.
-
 Contributing
 
 If you're interested in contributing to the Revolt NFT collection, we'd love to hear from you! Whether you're a developer, designer, marketer, or just someone who's passionate about NFTs and blockchain technology, there are plenty of ways to get involved.
