@@ -2,59 +2,36 @@ import { WalletTypes } from "locklift/types/index";
 import { Address, Contract, Signer, zeroAddress } from "locklift";
 import { FactorySource } from "../build/factorySource";
 import fs from "fs";
-
+import * as ever from "everscale-standalone-client";
+import { deployedContracts } from "./constants";
 async function main() {
-  const signer = (await locklift.keystore.getSigner("0"))!;
+  const signer = (await locklift.keystore.getSigner("1"))!;
   const RevoltNftArt = locklift.factory.getContractArtifacts("RevoltNft");
   const IndexArt = locklift.factory.getContractArtifacts("Index");
   const IndexBasisArt = locklift.factory.getContractArtifacts("IndexBasis");
   var CollectionCon: Contract<FactorySource["RevoltNftCollection"]>;
-  const WalletV3 = await locklift.factory.accounts.addNewAccount({
-    type: WalletTypes.WalletV3, // or WalletTypes.HighLoadWallet or WalletTypes.WalletV3,
-    //Value which will send to the new account from a giver
-    value: locklift.utils.toNano(100),
-    //owner publicKey
+  const everWallet = ever.EverWalletAccount.fromPubkey({
     publicKey: signer.publicKey,
+    workchain: 0,
   });
-  console.log("wallet : ", WalletV3.account.address.toString());
-  let example_collection_metadata: string = fs.readFileSync(
-    "./metadata/Collection_metadata.json",
+  console.log("wallet : ", (await everWallet).address.toString());
+
+  let example_agent_metadata: string = fs.readFileSync(
+    "./metadata/agents_metadata/2.json",
     "utf-8"
   );
-  const { contract: Collection, tx } = await locklift.factory.deployContract({
-    contract: "RevoltNftCollection",
-    publicKey: signer.publicKey,
-    initParams: {},
-    constructorParams: {
-      codeIndex: IndexArt.code,
-      codeIndexBasis: IndexBasisArt.code,
-      codeNft: RevoltNftArt.code,
-      json: example_collection_metadata,
-    },
-    value: locklift.utils.toNano(3),
-  });
-  CollectionCon = Collection;
-  console.log(`collection : ${Collection.address.toString()}`);
-  const jsonReturned = (
-    await Collection.methods
-      .getJson({
-        answerId: 0,
-      })
-      .call({})
-  ).json;
-  console.log(`Colection json : \n ${jsonReturned} \n `);
-  let example_agent_metadata: string = fs.readFileSync(
-    "./metadata/agents_metadata/1.json",
-    "utf-8"
+  const Collection = await locklift.factory.getDeployedContract(
+    "RevoltNftCollection",
+    new Address(deployedContracts.RevoltCollection)
   );
   const { traceTree: data } = await locklift.tracing.trace(
     Collection.methods.mint({ _json: example_agent_metadata }).send({
-      from: WalletV3.account.address,
-      amount: locklift.utils.toNano(5),
+      from: (await everWallet).address,
+      amount: locklift.utils.toNano(1),
     })
   );
   const idEvent = data?.findEventsForContract({
-    contract: CollectionCon,
+    contract: Collection,
     name: "NftCreated" as const,
   });
   console.log("Nft Id : ", idEvent![0].id);

@@ -46,7 +46,7 @@ describe("should deploy the collection and Nft contracts , and return the revela
     const { contract: Collection } = await locklift.factory.deployContract({
       contract: "RevoltNftCollection",
       publicKey: signer.publicKey,
-      initParams: {},
+      initParams: { _version: 1 },
       constructorParams: {
         codeIndex: IndexArt.code,
         codeIndexBasis: IndexBasisArt.code,

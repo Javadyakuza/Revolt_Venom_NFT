@@ -6,7 +6,7 @@ pragma AbiHeader expire;
 import "tip4/contracts/CollectionBase.tsol";
 
 contract RevoltNftCollection is CollectionBase{
-
+    uint32 static public _version;
     constructor(      
         TvmCell codeNft, 
         TvmCell codeIndex,
