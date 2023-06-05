@@ -12,8 +12,8 @@ The Revolt Agents NFTs are unique digital assets that can be bought, sold, and t
 
 ---
 
-## Collection : 0:4f78ce959bc90b28782f000be31ae2af3fc2aac25e2b9f2754486a05a49992c7
+# Collection : 0:4f78ce959bc90b28782f000be31ae2af3fc2aac25e2b9f2754486a05a49992c7
 
 ---
 
-## IPFS : https://bafybeify5q7od6cthzgxjkdy22qtrxtxzl5hro7rbh3oyg2rxs736eept4.ipfs.dweb.link/images
+# IPFS : https://bafybeify5q7od6cthzgxjkdy22qtrxtxzl5hro7rbh3oyg2rxs736eept4.ipfs.dweb.link/images
